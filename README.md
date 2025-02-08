@@ -28,3 +28,10 @@ RETURN NumericValue
             numericValue = try if isK then Number.From(Text.Start(cleanedText, Text.Length(cleanedText) - 1)) * 1000 
                             else Number.From(cleanedText)
                         otherwise 0
+
+
+adding col = Table.AddColumn(#"Sales Volume Cleaned", "Discount_Amount", each 
+    if [product_original_price] = null then 0 
+    else [product_original_price] - [product_price], type number
+)
+
